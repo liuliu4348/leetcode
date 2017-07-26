@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int removeElement(vector<int>& nums, int val) {
+        int len = nums.size();
+        int i=0;
+        int j=0;
+        if(len==0){
+            return 0;
+        }
+        for(i;i<len;i++){
+            if(nums[i]!=val){
+                nums[j++]=nums[i];
+            }else{
+                continue;
+            }
+        }
+        return j;
+    }
+};

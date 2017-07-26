@@ -1,0 +1,24 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<int> result;
+        vector<vector<int>> ret;
+        findResult(result,ret,k,n,1);
+        return ret;
+    }
+    
+    void findResult(vector<int>& result,vector<vector<int>>& ret,int k,int n,int begin){
+        if(n<0){
+            return ;
+        }
+        if(n == 0 && result.size()==k){
+            ret.push_back(result);
+        }
+        for(int i = begin;i < 10;i++){
+            result.push_back(i);
+            findResult(result,ret,k,n-i,i+1);
+            result.pop_back();
+        }
+        
+    }
+};

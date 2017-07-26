@@ -1,0 +1,31 @@
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        vector<vector<int>> vec1;
+        std::sort(nums.begin(), nums.end());//ÅÅĞòºÜÖØÒª
+        for(int i=0;i<nums.size();i++){
+            int target=-nums[i];
+            int l=i+1;
+            int r=nums.size()-1;
+            while(l<r){
+                if (nums[l]+nums[r]>target) {
+                    r--;
+                }else if (nums[l]+nums[r]<target) {
+                    l++;
+                }else{
+                    vector<int> triple;
+                    triple.push_back(nums[i]);
+                    triple.push_back(nums[l]);
+                    triple.push_back(nums[r]);
+                    vec1.push_back(triple);
+                    while(l<r && nums[l]==triple[1]){l++;}
+                    while(l<r && nums[r]==triple[2]){r--;}
+                }
+            }
+            while(i+1<nums.size() && nums[i]==nums[i+1] ){
+                i++;
+            }
+        }
+        return vec1;
+    }
+};

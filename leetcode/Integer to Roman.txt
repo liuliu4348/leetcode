@@ -1,0 +1,14 @@
+class Solution {
+public:
+    string intToRoman(int num) {
+        int a=num%10; //个位
+        int b=(num/10)%10; //十位
+        int c=(num/100)%10;//百位
+        int d=num/1000; //千位
+        string M[]={"", "M", "MM", "MMM"};
+        string C[] = {"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM"};
+        string X[] = {"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC"};
+        string I[] = {"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"};
+        return M[d]+C[c]+X[b]+I[a];
+    }
+};

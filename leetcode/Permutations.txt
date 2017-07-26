@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        int m = nums.size();
+        vector<vector<int>> ret;
+        if(nums.size()==0){
+           return ret; 
+        }
+        vector<int> used(m,0);
+        vector<int> result;
+        findResult(nums,used,ret,result,0);
+        return ret;
+    }
+    
+    void findResult(vector<int>& nums,vector<int> &used,vector<vector<int>> &ret,vector<int> &result,int count){
+        if(count == nums.size()){
+            ret.push_back(result);
+            return ;
+        }
+        for(int i =0;i<nums.size();i++){
+            if(used[i]==0){
+                result.push_back(nums[i]);
+                used[i]=1;
+                findResult(nums,used,ret,result,count+1);
+                result.pop_back();
+                used[i]=0;
+            }
+        }
+    }
+};

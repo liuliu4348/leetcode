@@ -1,0 +1,17 @@
+class Solution {
+public
+    double findMedianSortedArrays(vectorint& nums1, vectorint& nums2) {
+        vectorint buf;
+        vectorintiterator it;
+        for(it=nums1.begin();itnums1.end();it++){
+            buf.push_back(it);
+        }
+        for(it=nums2.begin();itnums2.end();it++){
+            buf.push_back(it);
+        }
+        sort(buf.begin(),buf.end());
+        int len=buf.size();
+        double median=(double) (len%2 buf[len1](buf[(len-1)1]+buf[len1])2.0); 
+        return median;
+    }
+};

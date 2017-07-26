@@ -1,0 +1,37 @@
+double findkth(vector<int>& num1,vector<int>& num2,int k){
+    if(num1.size()>num2.size()){
+        return findkth( num2, num1,k);
+    }
+    if(num1.size()==0){
+        return num2[k-1];
+    }
+    if(k==1){
+        return min(num1[0],num2[0]);
+    }
+    int len1=num1.size();
+    int pa=min(k/2,len1);//避免越界的情况
+    int pb=k-pa;//避免k为奇数，返回值不准确的情况
+    if(num1[pa-1]<num2[pb-1]){
+        //num1.erase(num1.begin(),num1.begin()+pa);
+        vector<int> v3(num1.begin()+pa,num1.end());
+        return findkth(v3,num2,k-pa);
+    }else if(num1[pa-1]>num2[pb-1]){
+        //num2.erase(num2.begin(),num2.begin()+pb);
+        vector<int> v3(num2.begin()+pb,num2.end());
+        return findkth(num1,v3,k-pb);
+    }else{
+        return num1[pa-1];
+    }
+}
+
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        int len=nums1.size()+nums2.size();
+        if(len%2==1){
+            return findkth(nums1,nums2,len/2+1);
+        }else{
+            return (findkth(nums1,nums2,len/2)+findkth(nums1,nums2,len/2+1))/2;
+        }
+    }
+};

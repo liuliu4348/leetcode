@@ -1,0 +1,53 @@
+class Solution {
+public:
+	class binaryTree {
+	public:
+		int value;
+		 binaryTree *next;
+	};
+	int reverse(int x) {
+		//if(pow(2,31))
+		const int max = 0x7fffffff;  //int最大值  
+		const int min = 0x80000000;  //int最小值 
+		bool flag = true;
+		long ret = 0;
+		if (x<0) {
+			x = -x;
+			flag = false;
+		}
+		int a = x, b;
+		int length = 1;
+		b = a % 10;
+		a = a / 10;
+	    binaryTree* head=new binaryTree() ;
+		head->value = b;
+		head->next = NULL;
+		struct binaryTree* p = head;
+		while (a != 0) {
+			b = a % 10;
+			a = a / 10;
+		    binaryTree* t=new binaryTree();
+			t->value = b;
+			p->next = t;
+			p = t;
+			length++;
+		}
+		if (length >= 31) {
+			return 0;
+		}
+		else {
+			while (length>0) {
+				ret += head->value* pow(10, length - 1);
+				length--;
+				head = head->next;
+			}
+		}
+		if (flag == false) {
+			ret = -ret;
+		}
+		if (ret > max || ret < min) {
+			return 0;
+		}
+		return ret;
+	}
+};

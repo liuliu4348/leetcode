@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int lengthOfLongestSubstring(string s) {
+        int i=1,len,maxlen;
+        int start;
+        string s1=s.substr(0,1);
+        maxlen=len=s1.length();
+        while(i<s.length()){
+            string::size_type found=s1.find(s[i]);
+            if(found==string::npos){
+                s1.push_back(s[i++]);
+                len=s1.length();
+            }else{
+                s1.push_back(s[i++]);
+                s1=s1.substr(found+1);
+                len=s1.length();
+            }
+            if(maxlen<len){
+                maxlen=len;
+            }
+        }
+        return maxlen;
+    }
+};

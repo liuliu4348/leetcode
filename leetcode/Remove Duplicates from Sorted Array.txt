@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int removeDuplicates(vector<int>& nums) {
+        if(nums.size()==0){
+            return 0;
+        }
+        int len = 1;
+        vector<int>::iterator it;
+        for(it=nums.begin()+1;it<nums.end();it++){
+            if(*it==*(it-1)){
+                continue;
+            }else{
+                nums[len]=*it;
+                len++;
+            }
+        }
+        return len;
+    }
+};

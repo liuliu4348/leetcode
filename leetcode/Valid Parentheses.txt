@@ -1,0 +1,30 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> bracket;
+        map<char,char> m;
+        m.insert(make_pair(')','('));
+        m.insert(make_pair(']','['));
+        m.insert(make_pair('}','{'));
+        for(int i=0;i<s.size();i++){
+            if(s[i]=='(' || s[i]=='[' || s[i]=='{'){
+                bracket.push(s[i]);
+            }if(s[i]==')' || s[i]=='}' || s[i]==']'){
+                if(bracket.empty()){
+                    return false;
+                }
+                if(m.find(s[i])->second==bracket.top()){
+                   bracket.pop();
+                }else{
+                    return false;
+                }
+            }else{
+                continue;
+            }
+        }
+        if(bracket.empty()){
+            return true;
+        }
+        return false;
+    }
+};

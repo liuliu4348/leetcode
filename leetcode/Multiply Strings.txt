@@ -1,0 +1,35 @@
+class Solution {
+public:
+    string multiply(string num1, string num2) {
+        if(num1.empty() || num2.empty()){
+            return string();
+        }
+        int m = num1.size();
+        int n = num2.size();
+        vector<int> tmp(m+n,0);
+        int k = m+n-2;
+        for(int i = 0;i<m;i++){
+            for(int j = 0;j<n;j++){
+                tmp[k-i-j]+=(num1[i]-'0')*(num2[j]-'0');
+            }
+        }
+        int carryBit = 0; //½øÎ»
+        for(int i=0;i<=k+1;i++){
+            tmp[i]+=carryBit;
+            carryBit=tmp[i]/10;
+            tmp[i]%=10;
+        }
+        int i = k+1;
+        while(tmp[i]==0){
+            i--;
+        }
+        if(i<0){
+            return "0";
+        }
+        string ret;
+        for(;i>=0;i--){
+            ret.push_back(tmp[i]+'0');
+        }
+        return ret;
+    }
+};

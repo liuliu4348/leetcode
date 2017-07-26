@@ -1,0 +1,29 @@
+class Solution {
+public:
+	vector<string> letterCombinations(string digits) {
+		vector<string> ret;
+		if (digits.size() == 0) {
+			return vector<string>();
+		}
+		ret.push_back("");
+		vector<string> str = { "","","abc","def","ghi","jkl","mno","pqrs","tuv","wxyz" };
+		for (int i = 0; i<digits.size(); i++) {
+			int num = digits[i] - '0';
+			if (num>9 || num<0) {
+				break;
+			}
+			string candidator=str[num];
+			if (candidator.empty()) {
+			    continue;
+			}
+			vector<string> tmp;
+			for (int j = 0; j<candidator.size(); j++) {
+				for(int k=0;k<ret.size();k++){
+				    tmp.push_back(ret[k]+candidator[j]);
+				}
+			}
+			ret.swap(tmp);
+		}
+		return ret;
+	}
+};

@@ -1,0 +1,39 @@
+class Solution {
+public:
+	int myAtoi(string str) {
+// 		if (str.size() == 0) {
+// 			return 0;
+// 		}
+		int index=0;
+		while(str[index]==' '){
+		    index++;
+		}
+		int flag = 1;
+		if (str[index] == '+' || str[index] == '-') {
+			if (str[index] == '-') {
+				flag = -1;
+			}
+			index++;
+		}
+// 		if (str.size() == 0 || str[index]<'0' || str[index]>'9') {
+// 			return 0;
+// 		}
+		long sum = 0;
+		const int max = 0x7fffffff;
+		const int min = 0x80000000;
+		while (index<str.size()) {
+			if (str[index]<'0' || str[index]>'9') {
+				break;
+			}
+			sum = sum * 10 + str[index] - '0';
+			if (sum*flag>=max){
+			    return max;
+			}else if (sum*flag<=min) {
+			    return min;
+			}
+			index++;
+		}
+		return flag*sum;
+	}
+};
+//注释的判断条件都可以省略

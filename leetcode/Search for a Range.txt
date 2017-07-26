@@ -1,0 +1,40 @@
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int> tmp = {-1,-1};
+        if(nums.size() == 0){
+            return tmp;
+        }
+        int left = 0;
+        int right = nums.size()-1;
+        vector<int> ret;
+        while(left <= right){
+            int mid = (left + right)/2;
+            if(nums[mid] == target){
+                int a = mid;
+                while(a>0){
+                    if(nums[--a] != target){
+                        a+=1;
+                        break;
+                    }
+                }
+                ret.push_back(a);
+                a = mid;
+                while(a < nums.size()-1){
+                    if(nums[++a] != target){
+                        a-=1;
+                        break;
+                    }
+                }
+                ret.push_back(a);
+                return ret;
+            }else if(nums[mid]<target){
+                left = mid + 1;
+            }else{
+                right = mid - 1;
+            }
+        }
+        return tmp;
+        
+    }
+};

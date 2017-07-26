@@ -1,0 +1,43 @@
+class Solution {
+public:
+    void get_next(string needle,int len,int *next){
+        int i=0;
+        int k=-1;
+        next[i]=-1;
+        while(i<len-1){
+            if(k==-1 || needle[i]==needle[k]){
+                if(needle[++i]==needle[++k]){
+                    next[i]=next[k];
+                }else{
+                    next[i]=k;
+                }
+            }else{
+                k=next[k];
+            }
+        }
+    }
+    int KMP(string haystack,int len1,string needle,int len2,int *next){
+        int i=0;
+        int j=0;
+        while(i<len1 && j<len2){
+            if(haystack[i]==needle[j] || j==-1){
+                i++;
+                j++;
+            }else{
+                j=next[j];
+            }
+        }
+        if(j>=len2){
+            return i-len2;
+        }else{
+            return -1;
+        }
+    }
+    int strStr(string haystack, string needle) {
+        int len1=haystack.size();
+        int len2=needle.size();
+        int *next= new int[len2];
+        get_next(needle,len2,next);
+        return KMP(haystack,len1,needle,len2,next);
+    }
+};

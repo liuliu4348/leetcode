@@ -1,0 +1,48 @@
+#include <iostream>
+
+using namespace std;
+int grade[30000];
+
+int getMaxGrade(int x,int y){
+    int maxGrade = grade[x];
+    int i;
+    for(i=x+1;i<=y;i++){
+        if(grade[i]>maxGrade){
+            maxGrade = grade[i];
+        }
+    }
+    return maxGrade;
+}
+
+int main(){
+    int studentNum,queryNum;
+    while(cin>>studentNum>>queryNum){
+        int i;
+        for(i=0;i<studentNum;i++){
+            int score;
+            cin>>score;
+            grade[i]=score;
+        }
+        char op;
+        int a,b;
+        while(queryNum>0){
+            cin>>op>>a>>b;
+            if(op=='Q'){
+                if(a>b){
+                    int tmp= a;
+                    a=b;
+                    b=tmp;
+                }
+                cout<<getMaxGrade(a-1,b-1)<<endl;
+            }else if(op == 'U'){
+                grade[a-1]=b;
+                //cout<<getMaxGrade(a-1,b-1)<<endl;
+            }else{
+                cout << "ÄúÊäÈëÓÐÎó" << endl; 
+            }
+            queryNum--;
+        }
+    }
+    
+    
+}

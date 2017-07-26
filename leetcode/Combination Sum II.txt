@@ -1,0 +1,26 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& candidates, int target) {
+        sort(candidates.begin(),candidates.end());
+        vector<int> result;
+        vector<vector<int>> ret;
+        findResult(candidates,result,ret,target,0);
+        return ret;
+    }
+    
+    void findResult(vector<int>& candidates,vector<int>& result,vector<vector<int>>& ret,int target,int begin){
+        if(target==0){
+            ret.push_back(result);
+            return;
+        }
+        for(int i = begin;i != candidates.size() && target >= candidates[i];i++){
+            if(i == begin || candidates[i] != candidates[i-1]){
+                result.push_back(candidates[i]);
+                findResult(candidates,result,ret,target-candidates[i],i+1);
+                result.pop_back();
+            }
+        }
+            
+    }
+    
+};

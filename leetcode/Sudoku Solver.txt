@@ -1,0 +1,59 @@
+class Solution {
+public:
+    void solveSudoku(vector<vector<char>>& board) {
+        for(int i=0;i<9;i++){
+            for(int j=0;j<9;j++){
+                if(board[i][j]!='.'){
+                    fill(i,j,board[i][j]-'0');
+                }
+            }
+        }
+        solve(board,0);
+    }
+    
+    void fill(int row,int col,int val){
+        rowValid[row][val]=1;
+        columnValid[col][val]=1;
+        subBoardValid[3*(row/3)+col/3][val]=1;
+    }
+    
+    bool isValid(int row,int col,int val){
+        if(rowValid[row][val]==0 && columnValid[col][val]==0 && subBoardValid[3*(row/3)+col/3][val]==0){
+            return true;
+        }
+        return false;
+    }
+    
+    void clean(int row,int col,int val){
+        rowValid[row][val]=0;
+        columnValid[col][val]=0;
+        subBoardValid[3*(row/3)+col/3][val]=0;
+    }
+    
+    bool solve(vector<vector<char>>& board,int index){
+        if(index>80)
+            return true;
+        int row=index/9;
+        int col=index%9;
+        if(board[row][col]!='.'){
+            return solve(board,index+1);
+        }
+        for(int i='1';i<='9';i++){
+            if(isValid(row,col,i-'0')){
+                board[row][col]=i;
+                fill(row,col,i-'0');
+                if(solve(board,index+1)){
+                    return true;
+                }
+                clean(row,col,i-'0');
+            }
+        }
+        board[row][col]='.';
+        return false;
+        
+    }
+private:
+    int rowValid[9][10];
+    int columnValid[9][10];
+    int subBoardValid[9][10];
+};

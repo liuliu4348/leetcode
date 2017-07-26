@@ -1,0 +1,21 @@
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        vector<string> vec;
+        int m=n;
+        generate(n,m,"",vec);
+        return vec;
+        
+    }
+    void generate(int n,int m,string s,vector<string> &v){
+        if(m==0 && n==0){
+            v.push_back(s);
+        }
+        if(n>0){
+            generate(n-1,m,s+'(',v);
+        }
+        if(m>0 && n<m){
+            generate(n,m-1,s+')',v);
+        }
+    }
+};
